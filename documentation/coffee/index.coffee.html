@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "coffee/index.coffee", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>index.coffee</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Data Driven Template(s)</p>
+  </div>
+  <div class="body"><p>This is to help front end developers, define views with objects and templates
+and the view automatically re-render that view if the data inside of it changes.</p>
+
+<p>There are probably a few out there that do this, but this class uses Request Animation Frame
+to re-render all changes on a animation frame, so changing 5 attributes at once, wont trigger
+5 renders, it will trigger a render on the next animation frame. This speeds up rendering and 
+cuts back on un-needed renders dramatically.</p>
+
+<p>Created by: Quinton Pike
+Email: <a href='mailto:<a href='mailto:qrpike@gmail.com'>qrpike@gmail.com</a>'><a href='mailto:qrpike@gmail.com'>qrpike@gmail.com</a></a></p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="k">class</span> <span class="nb">window</span><span class="p">.</span><span class="nx">DataDrivenTemplate</span> <span class="k">extends</span> <span class="nb">window</span><span class="p">.</span><span class="nx">EventEmitter</span>
+  
+  
+  
+  
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Constructor for auto-rendering element:</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">dataObject</span>
+      <span class="dox_type">Object</span>
+      <span><ul>
+<li>Data which we are going to watch for changes, this is also passed into the template function.</li>
+</ul></span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">template</span>
+      <span class="dox_type">Function</span>
+      <span><ul>
+<li>Template function which renders the HTML form the @dataObject</li>
+</ul></span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">container</span>
+      <span class="dox_type">Object</span>
+      <span><ul>
+<li>DOM Element where this template is to render inside of. </li>
+</ul></span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name">options</span>
+      <span class="dox_type">Object</span>
+      <span><ul>
+<li>Options we want to change from default settings.</li>
+</ul></span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nv">constructor: </span><span class="nf">( @dataObject, @template, @container, @options = {} )-&gt;</span>
+    
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Whether to automatically render on data changes:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="vi">@autoRender = </span><span class="nx">@options</span><span class="p">.</span><span class="nx">autoRender</span> <span class="o">||</span> <span class="kc">true</span>
+    <span class="vi">@append   = </span><span class="nx">@options</span><span class="p">.</span><span class="nx">appendOnInitialRender</span> <span class="o">||</span> <span class="kc">true</span>
+    <span class="vi">@renderOnInit = </span><span class="nx">@options</span><span class="p">.</span><span class="nx">renderOnInit</span> <span class="o">||</span> <span class="kc">true</span>
+    <span class="vi">@el = </span><span class="kc">null</span>
+    
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>If we are to auto-render the data, create watchers:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">@createWatcher</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@autoRender</span> 
+    
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Render the element:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">@render</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@renderOnInit</span>
+    
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>Render on animation frame points:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="vi">@needToRender = </span><span class="kc">false</span>
+  
+  
+  
+  
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>Create the Watches:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nv">createWatcher: </span><span class="o">=&gt;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>Watch the @dataObject for any and all changes.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">WatchJS</span><span class="p">.</span><span class="nx">watch</span> <span class="nx">@dataObject</span><span class="p">,</span> <span class="o">=&gt;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>If something changes, we set @needToRender = true.
+The way we trigger a render is to just set this to TRUE. Once
+we set this to true, next frame refresh on the browser it will render. 
+This helps align the renders with the browsers refresh = better performance.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="vi">@needToRender = </span><span class="kc">true</span> 
+  
+  
+  
+  
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<p>Re Render the HTML</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nv">reRender: </span><span class="o">=&gt;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
+</div>
+<p>Only trigger a rendering if we are set to needToRender = true</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">if</span> <span class="nx">@needToRender</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12">&#182;</a>
+</div>
+<p>Find the element within the container ( could of been appended ).</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nv">oldEl = </span><span class="nx">@container</span><span class="p">.</span><span class="nx">find</span> <span class="nx">@el</span> 
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
+</div>
+<p>Set @el to the new templated data.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="vi">@el = </span><span class="nx">$</span><span class="p">(</span> <span class="nx">@template</span><span class="p">(</span> <span class="nx">@</span> <span class="p">)</span> <span class="p">)</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+</div>
+<p>Replace the old template with the new rendered HTML.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">oldEl</span><span class="p">.</span><span class="nx">replaceWith</span> <span class="nx">@el</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
+</div>
+<p>Emit a event for other things to do their events:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">@emit</span> <span class="s">&#39;render&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nv">el : </span><span class="nx">@el</span><span class="p">,</span> <span class="nv">rerender: </span><span class="kc">true</span> <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+</div>
+<p>Set the needToRender to false since we are all done now.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="vi">@needToRender = </span><span class="kc">false</span>
+    
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Loop this function every animation requested. Only do something when 
+we actually need to render something again.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">requestAnimFrame</span> <span class="nx">@reRender</span>
+     
+     
+     
+  
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+</div>
+<p>Render HTML</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nv">render: </span><span class="o">=&gt;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+</div>
+<p>Set the @el to the templated HTML jQuery object:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="vi">@el = </span><span class="nx">$</span><span class="p">(</span> <span class="nx">@template</span><span class="p">(</span> <span class="nx">@</span> <span class="p">)</span> <span class="p">)</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+</div>
+<p>If we need to append the initial rendering to the container:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">if</span> <span class="nx">@append</span>
+      <span class="nx">@container</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span> <span class="nx">@el</span> <span class="p">)</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+</div>
+<p>Otherwise we just replace the container contents with the new HTML:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">else</span>
+      <span class="nx">@container</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span> <span class="nx">@el</span> <span class="p">)</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
+</div>
+<p>Emit event.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">@emit</span> <span class="s">&#39;render&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nv">el : </span><span class="nx">@el</span><span class="p">,</span> <span class="nv">rerender: </span><span class="kc">false</span> <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
+</div>
+<p>Kick off the Request Animation Frame Loop:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">@reRender</span><span class="p">()</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
