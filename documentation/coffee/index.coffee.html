@@ -270,7 +270,7 @@ This helps align the renders with the browsers refresh = better performance.</p>
 <p>Set @el to the new templated data.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-      <span class="vi">@el = </span><span class="nx">$</span><span class="p">(</span> <span class="nx">@template</span><span class="p">(</span> <span class="nx">@</span> <span class="p">)</span> <span class="p">)</span>
+      <span class="vi">@el = </span><span class="nx">@getHTML</span><span class="p">()</span>
 
 </pre></div>
         </td>
@@ -343,6 +343,51 @@ we actually need to render something again.</p>
 <div class="pilwrap">
   <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
 </div>
+<p>Generate the HTML from the specified template function:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nv">getHTML: </span><span class="nf">( jQueryObject = true )=&gt;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+</div>
+<p>Return it as a jQuery object:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">if</span> <span class="nx">jQueryObject</span>
+      <span class="nx">$</span><span class="p">(</span> <span class="nx">@template</span><span class="p">(</span> <span class="nx">@dataObject</span> <span class="p">)</span> <span class="p">)</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+</div>
+<p>Otherwise, just pass back the HTML:</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="k">else</span>
+      <span class="nx">@template</span><span class="p">(</span> <span class="nx">@dataObject</span> <span class="p">)</span>
+  
+  
+  
+  
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+</div>
 <p>Render HTML</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
@@ -354,12 +399,12 @@ we actually need to render something again.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
 </div>
 <p>Set the @el to the templated HTML jQuery object:</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-    <span class="vi">@el = </span><span class="nx">$</span><span class="p">(</span> <span class="nx">@template</span><span class="p">(</span> <span class="nx">@</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="vi">@el = </span><span class="nx">@getHTML</span><span class="p">()</span>
 
 </pre></div>
         </td>
@@ -367,7 +412,7 @@ we actually need to render something again.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
 </div>
 <p>If we need to append the initial rendering to the container:</p>
         </td>
@@ -381,7 +426,7 @@ we actually need to render something again.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+  <a class="pilcrow" href="#section-24" id="section-24">&#182;</a>
 </div>
 <p>Otherwise we just replace the container contents with the new HTML:</p>
         </td>
@@ -395,7 +440,7 @@ we actually need to render something again.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
+  <a class="pilcrow" href="#section-25" id="section-25">&#182;</a>
 </div>
 <p>Emit event.</p>
         </td>
@@ -408,7 +453,7 @@ we actually need to render something again.</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
+  <a class="pilcrow" href="#section-26" id="section-26">&#182;</a>
 </div>
 <p>Kick off the Request Animation Frame Loop:</p>
         </td>

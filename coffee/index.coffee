@@ -75,7 +75,7 @@ class window.ModelDrivenView extends window.EventEmitter
 			# Find the element within the container ( could of been appended ).
 			oldEl = @container.find @el 
 			# Set @el to the new templated data.
-			@el = $( @template( @ ) )
+			@el = @getHTML()
 			# Replace the old template with the new rendered HTML.
 			oldEl.replaceWith @el
 			# Emit a event for other things to do their events:
@@ -92,10 +92,22 @@ class window.ModelDrivenView extends window.EventEmitter
 		 
 		 
 	
+	# Generate the HTML from the specified template function:
+	getHTML: ( jQueryObject = true )=>
+		# Return it as a jQuery object:
+		if jQueryObject
+			$( @template( @dataObject ) )
+		# Otherwise, just pass back the HTML:
+		else
+			@template( @dataObject )
+	
+	
+	
+	
 	# Render HTML
 	render: =>
 		# Set the @el to the templated HTML jQuery object:
-		@el = $( @template( @ ) )
+		@el = @getHTML()
 		# If we need to append the initial rendering to the container:
 		if @append
 			@container.append( @el )
