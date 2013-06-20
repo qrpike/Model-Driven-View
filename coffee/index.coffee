@@ -4,7 +4,7 @@
 
 ###
 
-	Data Driven Template(s)
+	Model Driven View / Data Driven Template(s)
 	
 	This is to help front end developers, define views with objects and templates
 	and the view automatically re-render that view if the data inside of it changes.
@@ -18,7 +18,7 @@
 	Email: qrpike@gmail.com
 
 ###
-class window.DataDrivenTemplate extends window.EventEmitter
+class window.ModelDrivenView extends window.EventEmitter
 	
 	
 	
