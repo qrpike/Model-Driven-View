@@ -1,1 +1,1 @@
-var tree={"files":["README.md","index.js","required-libs.js"],"dirs":{"coffee":{"files":["index.coffee"]}}};
+var tree={"files":["README.md","build-script.sh","index.js"],"dirs":{"coffee":{"files":["index.coffee"]},"libs":{"files":["eventEmitter.js","requestAnimationFrame.js","watch.js"]},"minified":{"files":["mdv.min.js"]}}};
