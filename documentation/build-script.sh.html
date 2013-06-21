@@ -39,7 +39,12 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
 
+<span class="nv">GITCOMMENT</span><span class="o">=</span><span class="nv">$1</span>
 
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$GITCOMMENT&quot;</span> <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;Git Commit Comment not set, please set it&quot;</span>
+  <span class="nb">exit </span>0
+<span class="k">fi</span>
 
 
 </pre></div>
@@ -54,8 +59,10 @@
 requires: npm install uglify-js -g</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
+
 uglifyjs ./libs/watch.js ./libs/eventEmitter.js ./libs/requestAnimationFrame.js ./index.js -o minified/mdv.min.js --source-map minified/mdv.min.js.map
 
+docker -o ./documentation -c manni -s yes -I -x documentation,node_modules 
 
 
 </pre></div>
@@ -70,6 +77,8 @@ uglifyjs ./libs/watch.js ./libs/eventEmitter.js ./libs/requestAnimationFrame.js 
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 git add .
+git commit . -m <span class="s2">&quot;${GITCOMMENT}&quot;</span>
+git push
 </pre></div>
         </td>
       </tr>

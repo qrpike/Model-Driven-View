@@ -35,9 +35,16 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
 </div>
-<p>Request Animation Frame</p>
+<p>shim layer with setTimeout fallback</p>
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">requestAnimFrame</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span><span class="k">return</span> <span class="nb">window</span><span class="p">.</span><span class="nx">requestAnimationFrame</span><span class="o">||</span><span class="nb">window</span><span class="p">.</span><span class="nx">webkitRequestAnimationFrame</span><span class="o">||</span><span class="nb">window</span><span class="p">.</span><span class="nx">mozRequestAnimationFrame</span><span class="o">||</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span><span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="mi">1</span><span class="nx">E3</span><span class="o">/</span><span class="mi">60</span><span class="p">)}}();</span>
+        <td class="code highlight"><div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">requestAnimFrame</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="k">return</span>  <span class="nb">window</span><span class="p">.</span><span class="nx">requestAnimationFrame</span>       <span class="o">||</span>
+          <span class="nb">window</span><span class="p">.</span><span class="nx">webkitRequestAnimationFrame</span> <span class="o">||</span>
+          <span class="nb">window</span><span class="p">.</span><span class="nx">mozRequestAnimationFrame</span>    <span class="o">||</span>
+          <span class="kd">function</span><span class="p">(</span> <span class="nx">callback</span> <span class="p">){</span>
+            <span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">60</span><span class="p">);</span>
+          <span class="p">};</span>
+<span class="p">})();</span>
 </pre></div>
         </td>
       </tr>
