@@ -1,6 +1,6 @@
 // Watch.JS
 
-(function () {
+(function ( window ) {
 
     var WatchJS = {
         noMore: false
@@ -363,6 +363,6 @@
     WatchJS.callWatchers = callWatchers;
 
 	window.WatchJS = WatchJS;
-    return WatchJS;
+    return window;
 
-})
+})( window )
