@@ -60,7 +60,7 @@ ModelDrivenView = (function(_super) {
 
   ModelDrivenView.prototype.createWatcher = function() {
     var _this = this;
-    return WatchJS.watch(this.dataObject, this.options.watchAttributes, function() {
+    return WatchJS.watch(this.dataObject, this.options.watchAttributes || {}, function() {
       /* 
       					If something changes, we set @needToRender = true.
       					The way we trigger a render is to just set this to TRUE. Once
