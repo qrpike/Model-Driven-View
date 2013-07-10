@@ -1,7 +1,8 @@
 
 
 
-define [ 'EventEmitter','WatchJS','RAF' ], ( EventEmitter, WatchJS, RAF ) ->
+#define [ 'EventEmitter','WatchJS','RAF' ], ( EventEmitter, WatchJS, RAF ) ->
+
 
 
 	###
