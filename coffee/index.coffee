@@ -50,7 +50,7 @@
 			@createWatcher() if @autoRender 
 			
 			# Render the element:
-			@render() if @renderOnInit
+			@initialRender() if @renderOnInit
 			
 			# Render on animation frame points:
 			@needToRender = false 
@@ -59,14 +59,24 @@
 		# Create the Watches:
 		createWatcher: =>
 			# Watch the @dataObject for any and all changes.
-			WatchJS.watch @dataObject, =>
-				### 
-					If something changes, we set @needToRender = true.
-					The way we trigger a render is to just set this to TRUE. Once
-					we set this to true, next frame refresh on the browser it will render. 
-					This helps align the renders with the browsers refresh = better performance.
-				###
-				@needToRender = true  
+			if @options.watchAttributes?
+				# If we have set specific attributes to watch, only watch those:
+				WatchJS.watch @dataObject, @options.watchAttributes, nder
+			else
+				# Otherwise listen for all changes
+				WatchJS.watch @dataObject, @render
+				
+				
+				 
+		### 
+			If something changes, we set @needToRender = true.
+			The way we trigger a render is to just set this to TRUE. Once
+			we set this to true, next frame refresh on the browser it will render. 
+			This helps align the renders with the browsers refresh = better performance.
+		###
+		render: =>
+			@needToRender = true 
+		
 		
 		
 		
@@ -106,7 +116,7 @@
 		
 		
 		# Render HTML
-		render: =>
+		initialRender: =>
 			# Set the @el to the templated HTML jQuery object:
 			@el = @getHTML()
 			# If we need to append the initial rendering to the container:

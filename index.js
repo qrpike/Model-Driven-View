@@ -41,9 +41,10 @@ ModelDrivenView = (function(_super) {
     this.template = template;
     this.container = container;
     this.options = options != null ? options : {};
-    this.render = __bind(this.render, this);
+    this.initialRender = __bind(this.initialRender, this);
     this.getHTML = __bind(this.getHTML, this);
     this.reRender = __bind(this.reRender, this);
+    this.render = __bind(this.render, this);
     this.createWatcher = __bind(this.createWatcher, this);
     this.autoRender = this.options.autoRender || true;
     this.append = this.options.appendOnInitialRender || true;
@@ -53,23 +54,29 @@ ModelDrivenView = (function(_super) {
       this.createWatcher();
     }
     if (this.renderOnInit) {
-      this.render();
+      this.initialRender();
     }
     this.needToRender = false;
   }
 
   ModelDrivenView.prototype.createWatcher = function() {
-    var _this = this;
-    return WatchJS.watch(this.dataObject, function() {
-      /* 
-      					If something changes, we set @needToRender = true.
-      					The way we trigger a render is to just set this to TRUE. Once
-      					we set this to true, next frame refresh on the browser it will render. 
-      					This helps align the renders with the browsers refresh = better performance.
-      */
+    if (this.options.watchAttributes != null) {
+      return WatchJS.watch(this.dataObject, this.options.watchAttributes, nder);
+    } else {
+      return WatchJS.watch(this.dataObject, this.render);
+    }
+  };
 
-      return _this.needToRender = true;
-    });
+  /* 
+  			If something changes, we set @needToRender = true.
+  			The way we trigger a render is to just set this to TRUE. Once
+  			we set this to true, next frame refresh on the browser it will render. 
+  			This helps align the renders with the browsers refresh = better performance.
+  */
+
+
+  ModelDrivenView.prototype.render = function() {
+    return this.needToRender = true;
   };
 
   ModelDrivenView.prototype.reRender = function() {
@@ -104,7 +111,7 @@ ModelDrivenView = (function(_super) {
     }
   };
 
-  ModelDrivenView.prototype.render = function() {
+  ModelDrivenView.prototype.initialRender = function() {
     this.el = this.getHTML();
     if (this.append === true) {
       this.container.append(this.el);
