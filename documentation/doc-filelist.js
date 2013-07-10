@@ -1,1 +1,1 @@
-var tree={"files":["README.md","build-script.sh","index.js"],"dirs":{"coffee":{"files":["index.coffee"]},"libs":{"files":["eventEmitter.js","requestAnimationFrame.js","watch.js"]},"minified":{"files":["mdv.min.js"]}}};
+var tree={"files":["README.md","build-script.sh","index.js"],"dirs":{"coffee":{"files":["ModelDrivenView.coffee","index.coffee"]},"libs":{"files":["eventEmitter.js","requestAnimationFrame.js","watch.js"]},"minified":{"files":["mdv.min.js"]}}};
