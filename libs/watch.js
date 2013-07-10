@@ -362,6 +362,7 @@
     WatchJS.unwatch = unwatch;
     WatchJS.callWatchers = callWatchers;
 
+	window.WatchJS = WatchJS;
     return WatchJS;
 
 })
