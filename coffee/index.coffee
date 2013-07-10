@@ -59,7 +59,7 @@
 		# Create the Watches:
 		createWatcher: =>
 			# Watch the @dataObject for any and all changes.
-			WatchJS.watch @dataObject, =>
+			WatchJS.watch @dataObject, @options.watchAttributes, =>
 				### 
 					If something changes, we set @needToRender = true.
 					The way we trigger a render is to just set this to TRUE. Once
