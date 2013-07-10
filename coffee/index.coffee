@@ -8,6 +8,8 @@ define [ 'EventEmitter','WatchJS','RAF' ], ( EventEmitter, WatchJS, RAF ) ->
 	
 		Model Driven View / Data Driven Template(s)
 		
+		https://github.com/qrpike/Model-Driven-View
+		
 		This is to help front end developers, define views with objects and templates
 		and the view automatically re-render that view if the data inside of it changes.
 		
