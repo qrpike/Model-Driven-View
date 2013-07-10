@@ -61,7 +61,7 @@
 			# Watch the @dataObject for any and all changes.
 			if @options.watchAttributes?
 				# If we have set specific attributes to watch, only watch those:
-				WatchJS.watch @dataObject, @options.watchAttributes, nder
+				WatchJS.watch @dataObject, @options.watchAttributes, @render
 			else
 				# Otherwise listen for all changes
 				WatchJS.watch @dataObject, @render

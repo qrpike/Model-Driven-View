@@ -61,7 +61,7 @@ ModelDrivenView = (function(_super) {
 
   ModelDrivenView.prototype.createWatcher = function() {
     if (this.options.watchAttributes != null) {
-      return WatchJS.watch(this.dataObject, this.options.watchAttributes, nder);
+      return WatchJS.watch(this.dataObject, this.options.watchAttributes, this.render);
     } else {
       return WatchJS.watch(this.dataObject, this.render);
     }
